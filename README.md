@@ -1,30 +1,8 @@
-# 미세먼지 봇 
-> 지역명을 말하면 그 곳의 현재 미세먼지와 초미세먼지 수치를 알려주는 Line 채팅 봇
+# Line Bot 教學
 
-&nbsp;
-## 라인의 미세먼지 봇 QR코드
-![](https://user-images.githubusercontent.com/38426656/49324322-92a08080-f56e-11e8-872d-3d7449800dcb.PNG)
-
-
-## 미세먼지 봇 기능 예시
-
-&nbsp;
-> 제대로 된 지역 입력
-![](https://user-images.githubusercontent.com/38426656/49324262-bdd6a000-f56d-11e8-9fdc-e6babb06af08.PNG)
-
-
-> 잘못된 지역 입력 
-![](https://user-images.githubusercontent.com/38426656/49324263-c16a2700-f56d-11e8-9e77-983fb61bc4e8.PNG)
-
-
-> 전체 지역 입력
-
-![](https://user-images.githubusercontent.com/38426656/49324264-c7600800-f56d-11e8-8432-28cc080825ca.PNG)
-
-
-이 튜토리얼에서는 Python LINE Bot SDK를 사용하여 Heroku에서 간단한 컴백 로봇을 설정하는 방법을 보여줍니다.
+本教程介紹如何使用 Python LINE Bot SDK 在 Heroku 上架設一個簡單的回話機器人。
 <!--more-->
-샘플 봇을 다른 언어로 설정하려면 아래의 LINE Bot SDK 저장소를 참조하십시오.
+如果您想以另一種語言架設範例 bot，請參閱以下  LINE Bot SDK repositories。
 - [PHP](https://github.com/line/line-bot-sdk-php)
 - [Go](https://github.com/line/line-bot-sdk-go)
 - [Perl](https://github.com/line/line-bot-sdk-perl)
@@ -32,180 +10,179 @@
 - [Python](https://github.com/line/line-bot-sdk-python)
 - [Node.js](https://github.com/line/line-bot-sdk-nodejs)
 
+## 在你開始之前
 
+確保您具有以下內容：
 
-## 시작하기 전에
+- 擁有 Line 帳號
+- 擁有 [Heroku](https://www.heroku.com) 帳戶（您可以免費創建一個）
 
-다음 사항을 확인하십시오.：
-
-- 자신의 Line 계정 만들기 
-- [Heroku](https://www.heroku.com) 계정 (무료로 만들 수 있음)
-
-## Heroku 프로젝트 만들기
-1. Heroku에 로그인 한 후，
-  [Heroku](https://dashboard.heroku.com/apps) 이 페이지에서 New -> Create New App
+## 建立 Heroku 專案
+1. 登入 Heroku 後，
+  在 [Heroku](https://dashboard.heroku.com/apps) 頁面中，點選 New -> Create New App
   ![](https://i.imgur.com/Y3njp7I.png)
-2. 즐겨 사용하는 App name을 입력하고 Create app를 클릭.
+2. 輸入自己喜歡的 App name ，然後點擊 Create app
   ![](https://i.imgur.com/WJ85jXR.png)
-## Line Bot 채널 만들기
-1. [Line Consol] 들어가기(https://developers.line.me/console/)
+
+## 創建 Line Bot 頻道
+1. 進入 [Line 控制台](https://developers.line.me/console/)
     ![](https://i.imgur.com/vseYQt1.png)
-2. Provider 만들기.
+2. 創建提供者
     ![](https://i.imgur.com/0tnYFBd.png)
-3. Provider 이름 입력.
+3. 填入提供者名稱
     ![](https://i.imgur.com/2ne3H1F.png)
-4. Create 클릭.
+4. 點擊 Create
     ![](https://i.imgur.com/bdESW8G.png)
-5. Create Channel 클릭.
+5. 點擊 Create Channel
     ![](https://i.imgur.com/F1nAWhK.png)
-6. Bot 정보 채우기.
+6. 填入 Bot 資訊
     ![](https://i.imgur.com/3wYFSvl.png)
-7. Line 약관에 동의하고 Create 버튼 클릭.
+7. 同意 Line 條款，並按 Create
     ![](https://i.imgur.com/WNzl4sL.png)
-8. 금방 생성한 Bot 선택.
+8. 選擇剛剛創建的 Bot
     ![](https://i.imgur.com/6ocsOBW.png)
 
-## 샘플 봇 설정
+## 設定範例機器人
 
-다음 단계에 따라 리턴 로봇을 설정합니다。
+按照以下步驟架設一個回話機器人。
 
-1. 샘플 코드 다운로드(https://github.com/yaoandy107/line-bot-tutorial/archive/master.zip)
-2. [Line Consol] 들어가기(https://developers.line.me/console/)，방금 생성 한 로봇을 선택.
+1. 下載 [範例程式碼](https://github.com/yaoandy107/line-bot-tutorial/archive/master.zip)
+2. 進入 [Line 控制台](https://developers.line.me/console/)，選擇你剛剛創建的機器人
     ![](https://i.imgur.com/6ocsOBW.png)
-3.  webhook 열기 
+3. 開啟 webhook
 ![](https://i.imgur.com/nxvFPB1.png)
 ![](https://i.imgur.com/PzEKzdq.png)
-4. 미리 설정된 응답 메시지를 해제.
+4. 關閉預設罐頭回覆訊息
 ![](https://i.imgur.com/nXPRhT4.png)
 
-5. **Channel access token** 생성
+5. 產生 **Channel access token**
 ![](https://i.imgur.com/QyxnpZB.png)
 ![](https://i.imgur.com/quYbPx9.png)
-6. **Channel access token**  확보
+6. 取得 **Channel access token**
 ![](https://i.imgur.com/C7OTect.png)
-7. **Channel secret** 확보
+7. 取得 **Channel secret**
 ![](https://i.imgur.com/IwmvyzL.png)
 
-6. 아톰과 같은 편집기를 사용하여 샘플 코드 폴더 열기 app.py，그냥 얻을 것이다 **channel secret** 와 **channel access token** 기입
+6. 使用編輯器開啟範例程式碼資料夾內的 app.py，將剛剛取得的 **channel secret** 和 **channel access token** 填入
   ![](https://i.imgur.com/Uz16joi.png)
 
-## 프로그램을 Heroku 로 연결하기.
+## 將程式推到 Heroku 上
 
-1. 다운로드 및 설치 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)、[Git](https://git-scm.com/)
-2. 방금 다운로드 한 샘플 코드 폴더를 열고 경로에 cmd를 입력하십시오.
-3. 터미널이나 명령 줄 응용 프로그램을 사용하여 Heroku에 로그인하십시오.
+1. 下載並安裝 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)、[Git](https://git-scm.com/)
+2. 開啟剛剛下載的範例程式碼資料夾，在路徑上輸入 cmd
+3. 使用終端或命令行應用程序登錄到 Heroku
     ```shell＝
     heroku login
     ```
-4. git 초기화
+4. 初始化 git
     ``` shell=
-    $ git config --global user.name "양세종"
-    $ git config --global user.email Sejong@naver.com
+    $ git config --global user.name "你的名字"
+    $ git config --global user.email 你的信箱
     ```
-   참고 : ** 귀하의 이름 ** 및 ** 귀하의 사서함 **은 해당 ** 이름 ** 및 ** 사서함 **으로 대체됩니다. 
+    注意：**你的名字** 和 **你的信箱** 要換成各自的 **名字** 和 **信箱**
 
-5.  git 초기화
+5. 初始化 git
     ```shell＝
     git init
     ```
-   참고 : 처음 사용할 때만 입력하십시오.
+    注意：僅第一次使用時要輸入
 
-6.git을 heroku에 연결
+6. 用 git 將資料夾與 heroku 連接
     ```shell＝
     heroku git:remote -a {HEROKU_APP_NAME}
     ```
-    주의：{HEROKU_APP_NAME} Heroku 앱의 이름입니다.
+    注意：{HEROKU_APP_NAME} 是 Heroku 應用的名稱
     
-7. 다음 명령을 입력하여 코드를 Heroku로 푸시하십시오，**반송 오류가 발생하면 재입력할 것.**
+7. 輸入以下指令，將程式碼推上 Heroku，**如果有跳出錯誤請重新輸入**
     ```shell
     git add .
     git commit -m "Add code"
     git push -f heroku master
     ```
-    **Bot를 업데이트해야 할 때마다 위 지침을 다시 입력하십시오.**
+    **每當需要更新 Bot 時，請重新輸入上述指令**
 
-##  Heroku 를 Line 에 연결하기
-1. [Line Console]들어가기(https://developers.line.me/console/)，방금 생성 한 bot 선택
+## 將 Heroku 與 Line 綁定
+1. 進入 [Line 控制台](https://developers.line.me/console/)，選擇你剛剛創建的 Bot
     ![](https://i.imgur.com/6ocsOBW.png)
-2. Webhook URL에 Heroku URL을 입력하십시오.
+2. 在 webhook URL 中輸入 Heroku 網址
 
     ```shell
     {HEROKU_APP_NAME}.herokuapp.com/callback
     ```
     ![](https://i.imgur.com/EkDhAgb.png)
-   참고 : {HEROKU_APP_NAME}은 Heroku 앱의 이름입니다.
+    注意：{HEROKU_APP_NAME} 是 Heroku 應用的名稱
 
   
-## 샘플 결과 테스트
-1. [Line Console]들어가기](https://developers.line.me/console/)， 방금 생성 한 bot 선택
+## 測試範例成果
+1. 進入 [Line 控制台](https://developers.line.me/console/)，選擇你剛剛創建的 Bot
     ![](https://i.imgur.com/6ocsOBW.png)
-2. Console을 통해 “Channel settings” 페이지에서  QR Code 스캔，LINE에 친구에게 Bot을 추가하십시오.
-3. 온라인 봇 (Bot on Line)에 문자 메시지를 보내고 말하는 법을 배웁니다.
+2. 通過在控制台的 “Channel settings” 頁面上掃描 QR Code，將您的 Bot 添加到 LINE 的朋友中
+3. 在 Line 上向您的 Bot 發送文字訊息，並確認它會學你說話
 
-## 잘못된 검색
+## 錯誤尋找
 
-> 프로그램에서 문제가 발생하면 로그를보고 오류를 찾을 수 있습니다.
+> 當程式遇到問題時，可查看日誌以找出錯誤
 
-Heroku에서 Bot의 로그를 보려면 다음 단계를 따르십시오.
+要查看您的 Bot 在 Heroku 的日誌，請按照以下步驟。
 
-1. 먼저 Heroku CLI를 통해 로그인
+1. 如果沒登入，請先透過 Heroku CLI 登入
     ```shell
     heroku login
     ```
 
-2. app 로그 표시
+2. 顯示 app 日誌
     ```shell
     heroku logs --tail --app {HEROKU_APP_NAME}
     ```
-   참고 : {HEROKU_APP_NAME}은 (는) 위의 2 단계에서 앱 이름입니다.
+    注意：{HEROKU_APP_NAME} 是上述步驟2中的應用名稱。
     ```shell
     --tail                     # 持續打印日誌
     --app {HEROKU_APP_NAME}    # 指定 App
     ```
 
-## 프로그램 파일 설명
+## 程式檔案解說
 
-> 폴더에 두 개의 파일이있어 프로그램에서  heroku을 실행할 수 있습니다. 
+> 資料夾裡需含有兩份文件來讓你的程式能在 heroku 上運行
 
-- Procfile : heroku는 web : {language} {file} 명령을 실행하고, 언어는 python이고 자동 실행되는 파일은 app.py이므로 ** web : python app.py **로 변경했습니다.
--Requirements.txt : 사용 된 모든 키트를 나열하면 heroku가이 파일을 기반으로 필요한 키트를 설치합니다.
+- Procfile：heroku 執行命令，web: {語言} {檔案}，這邊語言為 python，要自動執行的檔案為 app.py，因此我們改成 **web: python app.py**。
+- requirements.txt：列出所有用到的套件，heroku 會依據這份文件來安裝需要套件
 
-### app.py (주요 프로그램)
-프로그램에서 handle_message () 메소드의 코드를 수정하여 로봇의 메시지 응답을 제어 할 수 있습니다.
+### app.py (主程式)
+可透過修改程式裡的 handle_message() 方法內的程式碼來控制機器人的訊息回覆
 
 ![](https://i.imgur.com/DNeNbpV.png)
 
-새 예제 코드에 유의하십시오.
-Git에 대해 더 알고 싶다면 Python3、[Flask kit](http://docs.jinkan.org/docs/flask/)、[Line bot sdk](https://github.com/line/line-bot-sdk-python)
+新版範例程式碼內附註解
+如想更多了解此程式，可以去研究 Git、Python3、[Flask 套件](http://docs.jinkan.org/docs/flask/)、[Line bot sdk](https://github.com/line/line-bot-sdk-python)
 
 
-## 고급 작동
-[공식파일](https://github.com/line/line-bot-sdk-python#api)
-### 답장 메시지
-메시지가 도착하면 메시지에만 회신 할 수 있습니다.
+## 進階操作
+[官方文件](https://github.com/line/line-bot-sdk-python#api)
+### 回覆訊息
+只有當有訊息傳來，才能回覆訊息
 ```python
 line_bot_api.reply_message(reply_token, 訊息物件)
 ```
-### 능동적으로 메시지를 전송
-Bot은 푸시 기능을 활성화해야합니다. 그렇지 않으면 프로그램에 오류가 발생합니다.
+### 主動傳送訊息
+Bot 需要有開啟 push 功能才可以做，否則程式會出錯
 ```python
 line_bot_api.push_message(push_token, 訊息物件)
 ```
 
-## 메시지 객체 분류
+## 訊息物件分類
 
-[공식 문서](https://developers.line.me/en/docs/messaging-api/message-types/)
+[官方文件](https://developers.line.me/en/docs/messaging-api/message-types/)
 
-샘플 코드 변경， handle_message() 메소드 내의 여러 함수를 구현.
+修改範例程式碼中， handle_message() 方法內的程式碼，可實現多種功能
 
-### TextSendMessage （문자 메시지）
+### TextSendMessage （文字訊息）
 ![](https://i.imgur.com/LieCFAb.png =250x)
 ```python
 message = TextSendMessage(text='Hello, world')
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### ImageSendMessage（그림 메시지）
+### ImageSendMessage（圖片訊息）
 ![](https://i.imgur.com/RaH7gqo.png =250x)
 ```python
 message = ImageSendMessage(
@@ -215,7 +192,7 @@ message = ImageSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### VideoSendMessage（비디오 메시지）
+### VideoSendMessage（影片訊息）
 ![](https://i.imgur.com/o6cvf3o.png =250x)
 ```python
 message = VideoSendMessage(
@@ -225,7 +202,7 @@ message = VideoSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### AudioSendMessage（오디오 메시지）
+### AudioSendMessage（音訊訊息）
 ![](https://i.imgur.com/w5szZag.png =250x)
 ```python
 message = AudioSendMessage(
@@ -235,7 +212,7 @@ message = AudioSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### LocationSendMessage（위치 메시지）
+### LocationSendMessage（位置訊息）
 ![](https://i.imgur.com/tXE7Aus.png =250x)
 ```python
 message = LocationSendMessage(
@@ -247,7 +224,7 @@ message = LocationSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### StickerSendMessage（텍스처 메시지）
+### StickerSendMessage（貼圖訊息）
 ![](https://i.imgur.com/7x0mgK1.png =250x)
 ```python
 message = StickerSendMessage(
@@ -257,7 +234,7 @@ message = StickerSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### ImagemapSendMessage （그룹 메시지）
+### ImagemapSendMessage （組圖訊息）
 ![](https://i.imgur.com/MoSf2D6.png =250x)
 ```python
 message = ImagemapSendMessage(
@@ -282,7 +259,7 @@ message = ImagemapSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### TemplateSendMessage - ButtonsTemplate （버튼 인터페이스 메시지）
+### TemplateSendMessage - ButtonsTemplate （按鈕介面訊息）
 ![](https://i.imgur.com/41lXWjP.png =250x)
 ```python
 message = TemplateSendMessage(
@@ -311,7 +288,7 @@ message = TemplateSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### TemplateSendMessage - ConfirmTemplate（인터페이스 메시지 확인）
+### TemplateSendMessage - ConfirmTemplate（確認介面訊息）
 ![](https://i.imgur.com/U8NDhrt.png =250x)
 ```python
 message = TemplateSendMessage(
